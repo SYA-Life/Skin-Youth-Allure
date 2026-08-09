@@ -1,0 +1,1 @@
+Logo source kept in the repository asset pipeline. The live header/footer use assets/logo.svg.
