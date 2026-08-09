@@ -1,19 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 533" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
   <title id="title">SYA Skin Youth Allure</title>
-  <desc id="desc">SYA Skin Youth Allure brand mark in rose pink</desc>
-  <g fill="none" stroke="#E77F8C" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M525 112H255c-24 0-43 19-43 43v252c0 24 19 43 43 43h270c24 0 43-19 43-43v-52"/>
-    <path d="M568 183v-28c0-24-19-43-43-43"/>
-  </g>
-  <g fill="#E77F8C" font-family="Arial, Helvetica, sans-serif">
-    <text x="252" y="318" font-size="150" font-weight="400" letter-spacing="4">SY</text>
-  </g>
-  <g fill="none" stroke="#E77F8C" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M438 314l57-120 57 120"/>
-  </g>
-  <g fill="#E77F8C" font-family="Arial, Helvetica, sans-serif" font-weight="700" letter-spacing="8">
-    <text x="585" y="236" font-size="36">SKIN</text>
-    <text x="585" y="294" font-size="36">YOUTH</text>
-    <text x="585" y="352" font-size="36">ALLURE</text>
-  </g>
+  <desc id="desc">Official SYA Skin Youth Allure logo</desc>
+  <image href="https://cdn.shopify.com/s/files/1/0745/8304/8323/files/sya-skin-youth-allure-official-logo.jpg?v=1786268517" x="0" y="0" width="1536" height="1024" preserveAspectRatio="xMidYMid meet"/>
 </svg>
