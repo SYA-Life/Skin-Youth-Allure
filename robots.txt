@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sya-ls.com/sitemap.xml
