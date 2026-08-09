@@ -1,0 +1,37 @@
+name: Enlarge SYA logo
+
+on:
+  push:
+    paths:
+      - '.github/workflows/enlarge-logo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  enlarge-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Enlarge header and footer logo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('.navin{height:84px;', '.navin{height:94px;')
+          s = s.replace('.logo{display:flex;align-items:center;height:70px}.logo img{height:62px;width:auto;max-width:155px;', '.logo{display:flex;align-items:center;height:84px}.logo img{height:78px;width:auto;max-width:195px;')
+          s = s.replace('.footLogo{width:150px;', '.footLogo{width:190px;')
+          s = s.replace('@media(max-width:680px){.wrap{width:min(calc(100% - 28px),var(--max))}.navin{height:72px}.logo{height:62px}.logo img{height:56px;width:auto;max-width:128px}', '@media(max-width:680px){.wrap{width:min(calc(100% - 28px),var(--max))}.navin{height:82px}.logo{height:76px}.logo img{height:70px;width:auto;max-width:165px}')
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit logo enlargement
+        run: |
+          git config user.name "SYA-Life"
+          git config user.email "joby@sya-ls.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Enlarge SYA logo in header and footer"
+          git push
