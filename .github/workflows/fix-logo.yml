@@ -1,0 +1,47 @@
+name: Fix SYA logo asset
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-logo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download exact official SYA logo
+        run: |
+          mkdir -p assets
+          curl -L --fail --retry 3 "https://cdn.shopify.com/s/files/1/0745/8304/8323/files/sya-skin-youth-allure-official-logo.jpg?v=1786268517" -o assets/sya-logo.jpg
+          test -s assets/sya-logo.jpg
+
+      - name: Point site directly to local logo file
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text()
+          text = text.replace('assets/logo.svg', 'assets/sya-logo.jpg?v=2')
+          p.write_text(text)
+          PY
+
+      - name: Commit logo fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/sya-logo.jpg index.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Fix live SYA logo with local image asset"
+            git push origin main
+          fi
