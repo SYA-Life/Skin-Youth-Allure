@@ -1,0 +1,37 @@
+name: Fix SYA logo display
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-logo-display.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-logo-display:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Fix logo source and sizing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('assets/sya-logo.jpg?v=2', 'https://cdn.shopify.com/s/files/1/0745/8304/8323/files/sya-logo-header.png?v=1786270726')
+          s = s.replace('.logo img{width:172px;height:auto;display:block}', '.logo{display:flex;align-items:center;height:70px}.logo img{height:62px;width:auto;max-width:155px;display:block;object-fit:contain}')
+          s = s.replace('.footLogo{width:190px}', '.footLogo{width:150px;height:auto;object-fit:contain}')
+          s = s.replace('.navin{height:72px}.logo img{width:145px}', '.navin{height:72px}.logo{height:62px}.logo img{height:56px;width:auto;max-width:128px}')
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit live logo fix
+        run: |
+          git config user.name "SYA-Life"
+          git config user.email "joby@sya-ls.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Fix SYA logo visibility and mobile sizing"
+          git push
